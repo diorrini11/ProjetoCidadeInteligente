@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/optionAdd"
+        android:title="@string/add"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/optionRemove"
+        android:title="@string/remove"
+        app:showAsAction="ifRoom"></item>
+    <item
+        android:id="@+id/optionEdit"
+        android:title="@string/edit"
+        app:showAsAction="ifRoom"></item>
+    <item
+        android:id="@+id/optionSelectM"
+        android:title="@string/selectM"
+        app:showAsAction="never"></item>
+</menu>
