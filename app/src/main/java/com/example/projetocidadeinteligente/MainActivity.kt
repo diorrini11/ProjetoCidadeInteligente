@@ -1,5 +1,7 @@
 package com.example.projetocidadeinteligente
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -12,6 +14,9 @@ class MainActivity : AppCompatActivity()
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val sharedPref: SharedPreferences = getSharedPreferences(
+            getString(R.string.sharedPref), Context.MODE_PRIVATE)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean
@@ -25,10 +30,22 @@ class MainActivity : AppCompatActivity()
     {
         return when (item.itemId)
         {
-            R.id.optionAdd -> true
-            R.id.optionRemove -> true
-            R.id.optionEdit -> true
-            R.id.optionSelectM -> true
+            R.id.optionAdd ->
+            {
+                true
+            }
+            R.id.optionRemove ->
+            {
+                true
+            }
+            R.id.optionEdit ->
+            {
+                true
+            }
+            R.id.optionSelectM ->
+            {
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
