@@ -5,4 +5,5 @@
     <string name="remove">Remover</string>
     <string name="edit">Editar</string>
     <string name="selectM">Selecionar Vários</string>
+    <string name="removeAll">Remover Todos</string>
 </resources>

@@ -5,4 +5,5 @@
     <string name="edit">Edit</string>
     <string name="selectM">Select Multiple</string>
     <string name="sharedPref" translatable="false">file1</string>
+    <string name="removeAll">Remove All</string>
 </resources>
