@@ -6,4 +6,7 @@
     <string name="edit">Editar</string>
     <string name="selectM">Selecionar Vários</string>
     <string name="removeAll">Remover Todos</string>
+    <string name="insertTitulo">Insira o Título</string>
+    <string name="insertDescricao">Insira a Descrição</string>
+    <string name="empty_not_saved">Valores não inseridos</string>
 </resources>

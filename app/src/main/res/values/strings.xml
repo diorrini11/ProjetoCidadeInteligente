@@ -6,4 +6,7 @@
     <string name="selectM">Select Multiple</string>
     <string name="sharedPref" translatable="false">file1</string>
     <string name="removeAll">Remove All</string>
+    <string name="insertTitulo">Insert Title</string>
+    <string name="insertDescricao">Insert Description</string>
+    <string name="empty_not_saved">Values not inserted</string>
 </resources>

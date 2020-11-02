@@ -27,7 +27,7 @@ class NotaAdapter internal constructor(
 
     override fun onBindViewHolder(holder: NotaViewHolder, position: Int) {
         val current = notas[position]
-        holder.notaItemView.text = current.id.toString() + " - " + current.titulo + "-" + current.descricao
+        holder.notaItemView.text = current.id.toString() + " - " + current.titulo + " - " + current.descricao
     }
 
     internal fun setNotas(notas: List<Nota>) {

@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity()
         // view model
         notaViewModel = ViewModelProvider(this).get(NotaViewModel::class.java)
         notaViewModel.allNotas.observe(this, Observer { notas ->
-            // Update the cached copy of the words in the adapter.
+        // Update the cached copy of the words in the adapter.
             notas?.let { adapter.setNotas(it) }
         })
 
@@ -53,12 +53,34 @@ class MainActivity : AppCompatActivity()
         return true
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
+            val pTitulo = data?.getStringExtra(AddNota.EXTRA_REPLY_TITULO)
+            val pDescricao = data?.getStringExtra(AddNota.EXTRA_REPLY_DESCRICAO)
+
+            if (pTitulo!= null && pDescricao != null) {
+                val nota = Nota(titulo = pTitulo, descricao = pDescricao)
+                notaViewModel.insert(nota)
+            }
+
+        } else {
+            Toast.makeText(
+                applicationContext,
+                R.string.empty_not_saved,
+                Toast.LENGTH_LONG).show()
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
         return when (item.itemId)
         {
             R.id.optionAdd ->
             {
+                val intent = Intent(this@MainActivity, AddNota::class.java)
+                startActivityForResult(intent, newWordActivityRequestCode)
                 true
             }
             R.id.optionRemove ->
