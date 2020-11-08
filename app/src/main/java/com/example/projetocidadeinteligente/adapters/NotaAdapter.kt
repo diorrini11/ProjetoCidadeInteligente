@@ -40,7 +40,7 @@ class NotaAdapter internal constructor(
                 selectedItem!!.setBackgroundColor(Color.WHITE);
             }
             selectedPosition = position
-            holder.itemView.setBackgroundColor(Color.CYAN);
+            holder.notaItemView.setBackgroundColor(Color.CYAN);
             selectedItem = holder.notaItemView;
             cellClickListener.onCellClickListener(current)
         }
