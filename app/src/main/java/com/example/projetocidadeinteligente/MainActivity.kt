@@ -4,22 +4,25 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.view.*
 import android.widget.Toast
+import androidx.annotation.Nullable
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.selection.ItemDetailsLookup
+import androidx.recyclerview.selection.ItemKeyProvider
+import androidx.recyclerview.selection.SelectionTracker
+import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.projetocidadeinteligente.R
 import com.example.projetocidadeinteligente.adapters.NotaAdapter
 import com.example.projetocidadeinteligente.entities.Nota
 import com.example.projetocidadeinteligente.viewModel.NotaViewModel
 
-class MainActivity : AppCompatActivity()
+class MainActivity : AppCompatActivity(), CellClickListener
 {
     private lateinit var notaViewModel: NotaViewModel
     private val newWordActivityRequestCode = 1
@@ -31,7 +34,7 @@ class MainActivity : AppCompatActivity()
 
         // recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.listaNotas)
-        val adapter = NotaAdapter(this)
+        val adapter = NotaAdapter(this, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -103,5 +106,9 @@ class MainActivity : AppCompatActivity()
             */
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onCellClickListener(data: Nota) {
+        Toast.makeText(this, data.id.toString(), Toast.LENGTH_SHORT).show()
     }
 }

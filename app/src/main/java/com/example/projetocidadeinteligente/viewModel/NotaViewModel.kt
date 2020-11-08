@@ -1,11 +1,15 @@
 package com.example.projetocidadeinteligente.viewModel
 
 import android.app.Application
+import android.view.MotionEvent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.projetocidadeinteligente.db.NotaRepository
+import androidx.recyclerview.selection.ItemDetailsLookup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.projetocidadeinteligente.adapters.NotaAdapter
 import com.example.projetocidadeinteligente.db.NotaDB
+import com.example.projetocidadeinteligente.db.NotaRepository
 import com.example.projetocidadeinteligente.entities.Nota
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
