@@ -19,7 +19,7 @@ class NotaAdapter internal constructor(
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var notas = emptyList<Nota>()
-    private var selectedPosition = -1
+    var selectedNota: Nota? = null
     private var selectedItem: TextView? = null
 
     class NotaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -39,7 +39,7 @@ class NotaAdapter internal constructor(
             if(selectedItem!=null){
                 selectedItem!!.setBackgroundColor(Color.WHITE);
             }
-            selectedPosition = position
+            selectedNota = current
             holder.notaItemView.setBackgroundColor(Color.CYAN);
             selectedItem = holder.notaItemView;
             cellClickListener.onCellClickListener(current)

@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 
 class Nota(
     // Int? = null so when creating instance id has not to be passed as argument
-    @PrimaryKey(autoGenerate = true) val id: Int? = null,
-    @ColumnInfo(name = "titulo") val titulo: String,
-    @ColumnInfo(name = "descricao") val descricao: String
+    @PrimaryKey(autoGenerate = true) var id: Int? = null,
+    @ColumnInfo(name = "titulo") var titulo: String,
+    @ColumnInfo(name = "descricao") var descricao: String
 )
