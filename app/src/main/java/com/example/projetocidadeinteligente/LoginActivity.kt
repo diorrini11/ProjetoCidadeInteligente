@@ -26,6 +26,14 @@ class LoginActivity : AppCompatActivity()
         val sharedPref: SharedPreferences = getSharedPreferences(
             getString(R.string.sharedPref), Context.MODE_PRIVATE)
 
+        val sharedUserValue  = sharedPref.getString("User_Key" ,"defaultname")
+        val sharedPassValue = sharedPref.getString("Pass_key" ,"defaultname")
+
+        if(!(sharedUserValue.equals("defaultname") && sharedPassValue.equals("defaultname"))) {
+            val intent = Intent(this@LoginActivity, MapsActivity::class.java)
+            startActivityForResult(intent, mapsActivityRequestCode)
+        }
+
         val notesButton = findViewById<Button>(R.id.notesButton)
         notesButton.setOnClickListener {
             val intent = Intent(this@LoginActivity, NotasActivity::class.java)
@@ -39,6 +47,11 @@ class LoginActivity : AppCompatActivity()
             call.enqueue(object : Callback<Utilizador> {
                 override fun onResponse(call: Call<Utilizador>, response: Response<Utilizador>) {
                     if (response.isSuccessful) {
+                        with (sharedPref.edit()) {
+                            putString("User_Key", "Diogo")
+                            putString("Pass_Key", "123")
+                            apply()
+                        }
                         val intent = Intent(this@LoginActivity, MapsActivity::class.java)
                         startActivityForResult(intent, mapsActivityRequestCode)
                     }
