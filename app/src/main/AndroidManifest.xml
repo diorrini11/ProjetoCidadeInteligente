@@ -32,18 +32,18 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:label="@string/title_activity_maps">
+        <!--android:screenOrientation="portrait"--></activity>
+    <activity android:name=".LoginActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".AddNota" />
-        <activity android:name=".EditNota" />
-        <activity android:name=".NotasActivity"></activity>
-    </application>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <activity android:name=".AddNota" />
+    <activity android:name=".EditNota" />
+    <activity android:name=".NotasActivity"></activity>
+</application>
 
 </manifest>
