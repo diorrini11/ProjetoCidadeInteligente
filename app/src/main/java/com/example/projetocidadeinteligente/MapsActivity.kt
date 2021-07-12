@@ -174,6 +174,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 with (sharedPref.edit()) {
                     putString("User_Key", null)
                     putString("Pass_Key", null)
+                    putString("ID_Key", null)
                     apply()
                 }
                 finish()
