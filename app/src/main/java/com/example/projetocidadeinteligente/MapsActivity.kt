@@ -1,11 +1,17 @@
 package com.example.projetocidadeinteligente
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -142,6 +148,39 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val results = FloatArray(1)
         Location.distanceBetween(lat1, lng1, lat2, lng2, results)
         return results[0]
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean
+    {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_mapa, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        return when (item.itemId)
+        {
+            R.id.optionAdd ->
+            {
+                /*val intent = Intent(this@NotasActivity, AddNota::class.java)
+                startActivityForResult(intent, newNotaActivityRequestCode)*/
+                true
+            }
+            R.id.optionLogout ->
+            {
+                val sharedPref: SharedPreferences = getSharedPreferences(
+                    getString(R.string.sharedPref), Context.MODE_PRIVATE)
+                with (sharedPref.edit()) {
+                    putString("User_Key", null)
+                    putString("Pass_Key", null)
+                    apply()
+                }
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onPause() {
