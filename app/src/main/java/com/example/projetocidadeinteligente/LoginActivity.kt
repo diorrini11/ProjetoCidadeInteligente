@@ -35,7 +35,6 @@ class LoginActivity : AppCompatActivity()
 
         val sharedUserValue  = sharedPref.getString("User_Key" ,"defaultname")
         val sharedPassValue = sharedPref.getString("Pass_key" ,"defaultname")
-        val sharedIdValue = sharedPref.getString("ID_key" ,"defaultname")
 
         if(!(sharedUserValue.equals("defaultname") && sharedPassValue.equals("defaultname"))) {
             val intent = Intent(this@LoginActivity, MapsActivity::class.java)

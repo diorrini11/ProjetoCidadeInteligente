@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/tituloEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:hint="@string/insertTitulo"
+        android:inputType="textAutoComplete"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/latLongEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:editable="true"
+        android:enabled="false"
+        android:fontFamily="sans-serif-light"
+        android:inputType="textAutoComplete"
+        android:text=""
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/tipoSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/save" />
+</LinearLayout>

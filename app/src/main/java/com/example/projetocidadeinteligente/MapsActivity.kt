@@ -1,25 +1,24 @@
 package com.example.projetocidadeinteligente
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.projetocidadeinteligente.api.EndPoints
 import com.example.projetocidadeinteligente.api.Ponto
 import com.example.projetocidadeinteligente.api.ServiceBuilder
 import com.google.android.gms.location.*
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -40,6 +39,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var locationRequest: LocationRequest
     private var estgLat: Double = 0.0
     private var estgLong: Double = 0.0
+
+    private val addPontoActivityRequestCode = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +66,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         mMap.addMarker(
                             MarkerOptions().position(
                                 LatLng(
-                                    ponto.lat.toDouble(),
-                                    ponto.long.toDouble()
+                                    ponto.lati.toDouble(),
+                                    ponto.longi.toDouble()
                                 )
                             ).title(ponto.titulo)
                         )
@@ -159,18 +160,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
+        val sharedPref: SharedPreferences = getSharedPreferences(
+            getString(R.string.sharedPref), Context.MODE_PRIVATE)
+        var location = LatLng(lastLocation.latitude, lastLocation.longitude)
         return when (item.itemId)
         {
             R.id.optionAdd ->
             {
-                /*val intent = Intent(this@NotasActivity, AddNota::class.java)
-                startActivityForResult(intent, newNotaActivityRequestCode)*/
+                val intent = Intent(this@MapsActivity, AddPonto::class.java)
+                intent.putExtra("ID", sharedPref.getString("ID_Key", "defaultname"))
+                intent.putExtra("LATLONG", location.toString());
+                startActivityForResult(intent, addPontoActivityRequestCode)
                 true
             }
             R.id.optionLogout ->
             {
-                val sharedPref: SharedPreferences = getSharedPreferences(
-                    getString(R.string.sharedPref), Context.MODE_PRIVATE)
                 with (sharedPref.edit()) {
                     putString("User_Key", null)
                     putString("Pass_Key", null)
@@ -181,6 +185,65 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK)
+        {
+            val sharedPref: SharedPreferences = getSharedPreferences(
+                getString(R.string.sharedPref), Context.MODE_PRIVATE)
+            if(requestCode == addPontoActivityRequestCode)
+            {
+
+                    var pLatLong: LatLng
+                    val latlong = data?.getStringExtra(AddPonto.LATLONG)!!.split(",".toRegex()).toTypedArray()
+                try
+                {
+                    val latitude = latlong[0].substring(10, latlong[0].length - 1).toDouble()
+                    val longitude = latlong[1].substring(0, latlong[1].length - 1).toDouble()
+
+                    val pTitulo = data?.getStringExtra(AddPonto.ID)
+                    pLatLong = LatLng(latitude, longitude)
+                    val pTipo = data?.getStringExtra(AddPonto.TIPO)
+
+                if (pTitulo!= null && pTipo != null) {
+                    val request = ServiceBuilder.buildService(EndPoints::class.java)
+                    val call = request.addPonto(pTitulo, latitude.toString(), longitude.toString(), pTipo,
+                        sharedPref.getString("ID_Key", "defaultname")!!.toInt())
+
+                    call.enqueue(object : Callback<Ponto> {
+                        override fun onResponse(call: Call<Ponto>, response: Response<Ponto>) {
+                            if (response.isSuccessful) {
+                                mMap.addMarker(
+                                    MarkerOptions().position(
+                                        LatLng(
+                                            pLatLong.latitude,
+                                            pLatLong.longitude
+                                        )
+                                    ).title(pTitulo)
+                                )
+                            }
+                        }
+                        override fun onFailure(call: Call<Ponto>, t: Throwable)
+                        {
+                            Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
+                } catch (X: Exception)
+                {
+                    Toast.makeText(this@MapsActivity, X.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        else
+        {
+            Toast.makeText(
+                applicationContext,
+                R.string.empty_not_saved,
+                Toast.LENGTH_LONG).show()
         }
     }
 
