@@ -23,4 +23,7 @@
     <string name="acidente" >Acidente</string>
     <string name="obras" >Obras</string>
     <string name="center" >Centrar</string>
+    <string name="all" >Todos</string>
+    <string name="markerInserted">Ponto inserido!</string>
+    <string name="meters">metros</string>
 </resources>

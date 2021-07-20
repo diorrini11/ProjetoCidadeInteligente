@@ -26,4 +26,9 @@
     <string name="obras" >Constructions</string>
     <string name="etc" translatable="false">Etc</string>
     <string name="center" >Center</string>
+    <string name="all" >All</string>
+    <string name="markerInserted">Marker inserted!</string>
+    <string name="meters">meters</string>
+    <string name="latitude" translatable="false">Lat</string>
+    <string name="longitude" translatable="false">Long</string>
 </resources>

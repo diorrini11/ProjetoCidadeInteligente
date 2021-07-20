@@ -41,6 +41,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var estgLat: Double = 0.0
     private var estgLong: Double = 0.0
     private var FlagHAPPY: Int = 0
+    private var MapFLAG: Int = 0
 
     private val addPontoActivityRequestCode = 1
     private val updatePontoActivityRequestCode = 2
@@ -58,58 +59,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.getAllPontos()
-
-        call.enqueue(object : Callback<List<Ponto>> {
-            override fun onResponse(call: Call<List<Ponto>>, response: Response<List<Ponto>>) {
-                if (response.isSuccessful) {
-                    pontos = response.body()!!
-
-                    for (ponto in pontos) {
-                        if(ponto.tipo_id == 1)
-                        {
-                            mMap.addMarker(
-                                MarkerOptions().position(
-                                    LatLng(
-                                        ponto.lati.toDouble(),
-                                        ponto.longi.toDouble()
-                                    )
-                                ).title(ponto.titulo + " - Acidente")
-                            )
-                        }
-                        else
-                            if(ponto.tipo_id == 2)
-                            {
-                                mMap.addMarker(
-                                    MarkerOptions().position(
-                                        LatLng(
-                                            ponto.lati.toDouble(),
-                                            ponto.longi.toDouble()
-                                        )
-                                    ).title(ponto.titulo + " - Obras")
-                                )
-                            }
-                        else
-                            if(ponto.tipo_id == 3)
-                            {
-                                mMap.addMarker(
-                                    MarkerOptions().position(
-                                        LatLng(
-                                            ponto.lati.toDouble(),
-                                            ponto.longi.toDouble()
-                                        )
-                                    ).title(ponto.titulo + " - Etc")
-                                )
-                            }
-                    }
-                }
-            }
-            override fun onFailure(call: Call<List<Ponto>>, t: Throwable)
-            {
-                Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+        PopulateMap(0)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -128,17 +78,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
 
                 findViewById<TextView>(R.id.txtcoordenadas).setText(
-                    "Lat: " + location.latitude +
-                    " - Long: " + location.longitude)
+                    getString(R.string.latitude)+ " " + location.latitude +
+                    " - " + getString(R.string.longitude) + location.longitude)
 
                 val address = getAddress(lastLocation.latitude, lastLocation.longitude)
-                findViewById<TextView>(R.id.txtmorada).setText("Morada: " + address)
+                findViewById<TextView>(R.id.txtmorada).setText(getString(R.string.address) + address)
 
                 findViewById<TextView>(R.id.txtdistancia).setText(
-                    "Distância: " + calculateDistance(
+                    getString(R.string.distance) + calculateDistance(
                         lastLocation.latitude, lastLocation.longitude,
                         estgLat, estgLong
-                    ).toString() + " metros"
+                    ).toString() + " " + getString(R.string.meters)
                 )
             }
         }
@@ -239,6 +189,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15F))
                 true
             }
+            R.id.optionAll ->
+            {
+                PopulateMap(0)
+                true
+            }
             R.id.optionAcidente ->
             {
                 PopulateMap(1)
@@ -294,7 +249,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                         )
                                     ).title(pTitulo)
                                 )
-                                Toast.makeText(this@MapsActivity, "Ponto inserido!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@MapsActivity, getString(R.string.markerInserted), Toast.LENGTH_SHORT).show()
 
                             }
                         }
@@ -331,10 +286,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun PopulateMap(pTipo_ID: Int)
     {
-        mMap.clear()
-
+        if(MapFLAG == 1)
+        {
+            mMap.clear()
+            MapFLAG = 0
+        }
         val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.getPontosFilter(pTipo_ID)
+        var call: Call<List<Ponto>>
+
+        if(pTipo_ID == 0)
+        {
+            call = request.getAllPontos()
+        }
+        else
+        {
+            call = request.getPontosFilter(pTipo_ID)
+        }
 
         call.enqueue(object : Callback<List<Ponto>> {
             override fun onResponse(call: Call<List<Ponto>>, response: Response<List<Ponto>>) {
@@ -350,7 +317,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                         ponto.lati.toDouble(),
                                         ponto.longi.toDouble()
                                     )
-                                ).title(ponto.titulo + " - Acidente")
+                                ).title(ponto.titulo + " - " + getString(R.string.acidente))
                             )
                         }
                         else
@@ -362,7 +329,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                         ponto.lati.toDouble(),
                                         ponto.longi.toDouble()
                                     )
-                                ).title(ponto.titulo + " - Obras")
+                                ).title(ponto.titulo + " - " + getString(R.string.obras))
                             )
                         }
                         else
@@ -374,10 +341,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                         ponto.lati.toDouble(),
                                         ponto.longi.toDouble()
                                     )
-                                ).title(ponto.titulo + " - Etc")
+                                ).title(ponto.titulo + " - " + getString(R.string.etc))
                             )
                         }
                     }
+                    MapFLAG++
                 }
             }
             override fun onFailure(call: Call<List<Ponto>>, t: Throwable)

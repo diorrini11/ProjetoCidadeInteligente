@@ -22,6 +22,8 @@
         android:title="@string/filters"
         app:showAsAction="ifRoom">
         <menu>
+            <item android:id="@+id/optionAll"
+                android:title="@string/all"/>
             <item android:id="@+id/optionAcidente"
                 android:title="@string/acidente"/>
             <item android:id="@+id/optionObras"
