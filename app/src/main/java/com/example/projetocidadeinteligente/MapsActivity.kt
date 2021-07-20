@@ -42,6 +42,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var FlagHAPPY: Int = 0
 
     private val addPontoActivityRequestCode = 1
+    private val updatePontoActivityRequestCode = 2
+    private val removePontoActivityRequestCode = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -214,6 +216,37 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     apply()
                 }
                 finish()
+                true
+            }
+            R.id.optionUpdate ->
+            {
+                /*val intent = Intent(this@MapsActivity, AddPonto::class.java)
+                intent.putExtra("ID", sharedPref.getString("ID_Key", "defaultname"))
+                startActivityForResult(intent, updatePontoActivityRequestCode)*/
+                true
+            }
+            R.id.optionRemove ->
+            {
+                /*val intent = Intent(this@MapsActivity, AddPonto::class.java)
+                intent.putExtra("ID", sharedPref.getString("ID_Key", "defaultname"))
+                startActivityForResult(intent, removePontoActivityRequestCode)*/
+                true
+            }
+            R.id.optionCenter ->
+            {
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15F))
+                true
+            }
+            R.id.optionAcidente ->
+            {
+                true
+            }
+            R.id.optionObras ->
+            {
+                true
+            }
+            R.id.optionEtc ->
+            {
                 true
             }
             else -> super.onOptionsItemSelected(item)

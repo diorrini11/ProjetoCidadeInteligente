@@ -17,38 +17,41 @@
         android:id="@+id/txtcoordenadas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="5dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
         android:background="@color/colorPrimary"
+        android:padding="5dp"
+        android:text="@string/coordinates"
         android:textColor="#ffffff"
-        android:text="@string/coordinates" />
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/txtdistancia"
         android:layout_width="match_parent"
-        android:padding="5dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="2dp"
-        android:layout_marginRight="10dp"
-        android:textColor="#ffffff"
-        android:background="@color/colorPrimary"
         android:layout_below="@id/txtcoordenadas"
-        android:text="@string/distance" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
+        android:background="@color/colorPrimary"
+        android:padding="5dp"
+        android:text="@string/distance"
+        android:textColor="#ffffff"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/txtmorada"
         android:layout_width="match_parent"
-        android:padding="5dp"
-        android:layout_marginRight="10dp"
-        android:textColor="#ffffff"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:layout_marginLeft="10dp"
         android:layout_below="@id/txtdistancia"
-        android:text="@string/address" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/colorPrimary"
+        android:padding="5dp"
+        android:text="@string/address"
+        android:textColor="#ffffff"
+        android:visibility="invisible" />
 
 </RelativeLayout>

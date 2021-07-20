@@ -20,4 +20,10 @@
     <string name="address">"Address: "</string>
     <string name="logout" translatable="false">Logout</string>
     <string name="LoginError">Login failed</string>
+    <string name="update" >Update</string>
+    <string name="filters" >Filters</string>
+    <string name="acidente" >Accident</string>
+    <string name="obras" >Constructions</string>
+    <string name="etc" translatable="false">Etc</string>
+    <string name="center" >Center</string>
 </resources>

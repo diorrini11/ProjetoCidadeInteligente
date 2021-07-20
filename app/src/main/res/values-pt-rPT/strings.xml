@@ -18,4 +18,9 @@
     <string name="address">"Morada: "</string>
     <string name="distance">"Distância: "</string>
     <string name="LoginError">Login falhou</string>
+    <string name="filters" >Filtros</string>
+    <string name="update">Atualizar</string>
+    <string name="acidente" >Acidente</string>
+    <string name="obras" >Obras</string>
+    <string name="center" >Centrar</string>
 </resources>
