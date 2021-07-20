@@ -19,4 +19,7 @@ interface EndPoints
     fun addPonto(@Field("titulo") titulo: String, @Field("lati") lat: String,
                 @Field("longi") long: String, @Field("tipo_id") tipo: String,
                 @Field("utilizador_id") id: Int): Call<Ponto>
+
+    @GET("/api/pontoFilter/{tipo}")
+    fun getPontosFilter(@Path("tipo") tipo_id: Int): Call<List<Ponto>>
 }
