@@ -63,14 +63,43 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     pontos = response.body()!!
 
                     for (ponto in pontos) {
-                        mMap.addMarker(
-                            MarkerOptions().position(
-                                LatLng(
-                                    ponto.lati.toDouble(),
-                                    ponto.longi.toDouble()
+                        if(ponto.tipo_id == 1)
+                        {
+                            mMap.addMarker(
+                                MarkerOptions().position(
+                                    LatLng(
+                                        ponto.lati.toDouble(),
+                                        ponto.longi.toDouble()
+                                    )
+                                ).title(ponto.titulo + " - Acidente")
+                            )
+                        }
+                        else
+                            if(ponto.tipo_id == 2)
+                            {
+                                mMap.addMarker(
+                                    MarkerOptions().position(
+                                        LatLng(
+                                            ponto.lati.toDouble(),
+                                            ponto.longi.toDouble()
+                                        )
+                                    ).title(ponto.titulo + " - Obras")
                                 )
-                            ).title(ponto.titulo)
-                        )
+                            }
+                        else
+                            if(ponto.tipo_id == 3)
+                            {
+                                mMap.addMarker(
+                                    MarkerOptions().position(
+                                        LatLng(
+                                            ponto.lati.toDouble(),
+                                            ponto.longi.toDouble()
+                                        )
+                                    ).title(ponto.titulo + " - Etc")
+                                )
+                            }
+                        Toast.makeText(this@MapsActivity, ponto.titulo + "/nEtc", Toast.LENGTH_SHORT).show()
+
                     }
                 }
             }
@@ -224,6 +253,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                         )
                                     ).title(pTitulo)
                                 )
+                                Toast.makeText(this@MapsActivity, "Ponto inserido!", Toast.LENGTH_SHORT).show()
+
                             }
                         }
                         override fun onFailure(call: Call<Ponto>, t: Throwable)

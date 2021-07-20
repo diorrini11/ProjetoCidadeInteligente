@@ -19,4 +19,5 @@
     <string name="distance">"Distance: "</string>
     <string name="address">"Address: "</string>
     <string name="logout" translatable="false">Logout</string>
+    <string name="LoginError">Login failed</string>
 </resources>

@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity()
                 }
 
                 override fun onFailure(call: Call<Utilizador>, t: Throwable) {
-                    Toast.makeText(this@LoginActivity, t.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, getString(R.string.LoginError), Toast.LENGTH_SHORT).show()
                 }
             })
         }
