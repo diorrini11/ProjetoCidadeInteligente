@@ -39,6 +39,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var locationRequest: LocationRequest
     private var estgLat: Double = 0.0
     private var estgLong: Double = 0.0
+    private var FlagHAPPY: Int = 0
 
     private val addPontoActivityRequestCode = 1
 
@@ -98,8 +99,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                     ).title(ponto.titulo + " - Etc")
                                 )
                             }
-                        Toast.makeText(this@MapsActivity, ponto.titulo + "/nEtc", Toast.LENGTH_SHORT).show()
-
                     }
                 }
             }
@@ -118,7 +117,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 lastLocation = p0.lastLocation
                 var location = LatLng(lastLocation.latitude, lastLocation.longitude)
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15F))
+                if(FlagHAPPY == 0)
+                {
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15F))
+                    FlagHAPPY++
+                }
 
                 findViewById<TextView>(R.id.txtcoordenadas).setText(
                     "Lat: " + location.latitude +
