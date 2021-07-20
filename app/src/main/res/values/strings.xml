@@ -31,4 +31,5 @@
     <string name="meters">meters</string>
     <string name="latitude" translatable="false">Lat</string>
     <string name="longitude" translatable="false">Long</string>
+    <string name="erroObterPontos" >Error obtaining Markers</string>
 </resources>

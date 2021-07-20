@@ -350,7 +350,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             override fun onFailure(call: Call<List<Ponto>>, t: Throwable)
             {
-                Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MapsActivity, getString(R.string.erroObterPontos), Toast.LENGTH_SHORT).show()
             }
         })
     }

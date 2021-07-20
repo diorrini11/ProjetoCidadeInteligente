@@ -26,4 +26,5 @@
     <string name="all" >Todos</string>
     <string name="markerInserted">Ponto inserido!</string>
     <string name="meters">metros</string>
+    <string name="erroObterPontos" >Erro ao obter os marcadores</string>
 </resources>
