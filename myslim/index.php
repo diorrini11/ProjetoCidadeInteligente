@@ -7,5 +7,7 @@ require 'vendor/autoload.php';
 $app = new \Slim\App();
 
 require_once('api/utilizador.php');
+require_once('api/ponto.php');
+require_once('api/tipo.php');
 
 $app->run();
