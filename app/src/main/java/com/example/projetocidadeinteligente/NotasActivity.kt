@@ -124,6 +124,12 @@ class NotasActivity : AppCompatActivity(), CellClickListener
         }
     }
 
+    override fun onBackPressed() {
+        val intent = Intent(this@NotasActivity, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     override fun onCellClickListener(data: Nota) {
         //Toast.makeText(this, data.id.toString(), Toast.LENGTH_SHORT).show()
     }

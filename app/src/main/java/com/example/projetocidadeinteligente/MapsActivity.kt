@@ -167,6 +167,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     putString("ID_Key", null)
                     apply()
                 }
+                val intent = Intent(this@MapsActivity, LoginActivity::class.java)
+                startActivity(intent)
                 finish()
                 true
             }
@@ -282,6 +284,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     public override fun onResume() {
         super.onResume()
         startLocationUpdates()
+    }
+
+    override fun onBackPressed() {
+
     }
 
     fun PopulateMap(pTipo_ID: Int)

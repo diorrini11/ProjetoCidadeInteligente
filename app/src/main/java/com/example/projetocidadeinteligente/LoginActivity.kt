@@ -17,8 +17,6 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity()
 {
-    private val mapsActivityRequestCode = 1
-
     private lateinit var nomeText: EditText
     private lateinit var passText: EditText
 
@@ -38,13 +36,15 @@ class LoginActivity : AppCompatActivity()
 
         if(!(sharedUserValue.equals("defaultname") && sharedPassValue.equals("defaultname"))) {
             val intent = Intent(this@LoginActivity, MapsActivity::class.java)
-            startActivityForResult(intent, mapsActivityRequestCode)
+            startActivity(intent)
+            finish()
         }
 
         val notesButton = findViewById<Button>(R.id.notesButton)
         notesButton.setOnClickListener {
             val intent = Intent(this@LoginActivity, NotasActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         val loginButton = findViewById<Button>(R.id.loginButton)
@@ -61,7 +61,8 @@ class LoginActivity : AppCompatActivity()
                             apply()
                         }
                         val intent = Intent(this@LoginActivity, MapsActivity::class.java)
-                        startActivityForResult(intent, mapsActivityRequestCode)
+                        startActivity(intent)
+                        finish()
                     }
                     Toast.makeText(this@LoginActivity, response.body()!!.nome, Toast.LENGTH_SHORT).show()
                 }
